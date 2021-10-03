@@ -7,13 +7,6 @@
   <mat-icon>autorenew</mat-icon> Clear Rule
 </div>
 
-<!-- display the if clauses -->
-  <p *ngFor="let ifClause of userDataService.currentlyStagedRule.ifClause; let i = index"
-  (click)="userDataService.gotoChannelSelector('trigger', i)" class="pointer">
-    <span *ngIf="i > 1" class="clickable">and</span>
-    <span *ngIf="i == 1" class="clickable">while </span>
-    <span class="clause">{{ifClause.text}}</span>
-  </p>
 <!-- display the next this -->
 <p *ngIf="userDataService.currentlyStagedRule.ifClause.length == 0"
 (click)="userDataService.gotoChannelSelector('trigger', -1)" class="clause clickable pointer">
