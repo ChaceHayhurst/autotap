@@ -19,14 +19,6 @@
 (click)="userDataService.gotoChannelSelector('trigger', -1)" class="clause clickable pointer">
   Select a condition
 </p>
-<p *ngIf="userDataService.currentlyStagedRule.ifClause.length >= 1" 
-(click)="userDataService.gotoChannelSelector('triggerAdd', -1)" class="clause clickable pointer"
- class="optional clickable">
-  <span *ngIf="userDataService.currentlyStagedRule.ifClause.length == 1">while </span>
-  <span *ngIf="userDataService.currentlyStagedRule.ifClause.length > 1">and</span>
-  <mat-icon>add_circle_outline</mat-icon> this
-</p>
-
 
 <!-- display the if clauses -->
 <p *ngFor="let clause of userDataService.currentlyStagedRule.thenClause; let i = index"
