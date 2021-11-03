@@ -7,8 +7,6 @@
   <mat-icon>autorenew</mat-icon> Clear Rule
 </div>
 
-<p>if</p>
-
 <!-- display the if clauses -->
   <p *ngFor="let ifClause of userDataService.currentlyStagedRule.ifClause; let i = index"
   (click)="userDataService.gotoChannelSelector('trigger', i)" class="pointer">
@@ -19,7 +17,7 @@
 <!-- display the next this -->
 <p *ngIf="userDataService.currentlyStagedRule.ifClause.length == 0"
 (click)="userDataService.gotoChannelSelector('trigger', -1)" class="clause clickable pointer">
-  this
+  Select a condition
 </p>
 <p *ngIf="userDataService.currentlyStagedRule.ifClause.length >= 1" 
 (click)="userDataService.gotoChannelSelector('triggerAdd', -1)" class="clause clickable pointer"
@@ -29,7 +27,6 @@
   <mat-icon>add_circle_outline</mat-icon> this
 </p>
 
-<p>then</p>
 
 <!-- display the if clauses -->
 <p *ngFor="let clause of userDataService.currentlyStagedRule.thenClause; let i = index"
@@ -42,7 +39,7 @@ style="width: 100%">
 <p (click)="userDataService.gotoChannelSelector('action', -1)" class="clause clickable pointer"
 *ngIf="userDataService.currentlyStagedRule.thenClause.length == 0"
 style="width: 100%">
-  that
+  Select a behavior
 </p>
 
 <!-- PRIORITY CLAUSE -->
