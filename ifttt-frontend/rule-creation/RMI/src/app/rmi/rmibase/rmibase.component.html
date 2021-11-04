@@ -13,9 +13,6 @@
   <mat-list-item class="rule-display" *ngFor="let rule of RULES; let i = index">
     <div class="rule-blocks">
       <div *ngFor="let word of rule.words; let i = index" class="rule-block">
-        <div class="rule-word">
-          {{rule.words[i]}}
-        </div>
         <div class="rule-icon">
           <mat-icon>{{rule.icons[i]}}</mat-icon>
           <div class="underneath">
