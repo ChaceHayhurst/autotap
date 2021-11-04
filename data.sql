@@ -1767,15 +1767,15 @@ COPY public.backend_capability (id, name, commandlabel, eventlabel, statelabel, 
 66	Temperature Control	Set {DEVICE}'s temperature to {temperature}	{DEVICE}'s temperature {temperature/=|becomes set to}{temperature/!=|becomes set to something other than}{temperature/>|becomes set above}{temperature/<|becomes set below} {temperature} degrees	{DEVICE}'s temperature is {temperature/=|set to}{temperature/!=|not set to}{temperature/>|set above}{temperature/<|set below} {temperature} degrees	t	t
 68	asd	hq	qsd	h	t	t
 36	Channel	Tune {DEVICE} to Channel {channel}	{DEVICE} {channel/=|becomes tuned to}{channel/!=|becomes tuned to something other than}{channel/>|becomes tuned above}{channel/<|becomes tuned below} {channel}	{DEVICE} is {channel/=|tuned to}{channel/!=|not tuned to}{channel/>|tuned above}{channel/<|tuned below} Channel {channel}	t	t
-72	Action	Consider doing:	Consider doing:	Consider doing:	t	f
-73	Goal	It is your goal that:	It is your goal that:	It is your goal that:	t	f
-115	Block in room?	There is a {color} block in the {room}?	There is a {color} block in the {room}?	There is a {color} block in the {room}?	f	t
-71	Sensing	Pay attention to:	Pay attention to:	Pay attention to:	t	f
-108	Put down held block	Put down held block	Put down held bock	Put down held block	f	t
 70	Move in a direction	Go through a door to the {directions}	Go through a door to the {directions}	Go through a door to the {directions}	f	t
+116	Current Room?	I am in the {room}?	I am in the {room}?	I am in the {room}?	f	t
+115	Block in room?	There is a {color} block in the {room}?	There is a {color} block in the {room}?	There is a {color} block in the {room}?	f	t
 114	Holding block?	Holding a {color} block?	Holding a {color} block?	Holding a {color} block?	f	t
-105	Current Room?	I am in the {rooms}?	I am in the {rooms}?	I am in the {rooms}?	f	t
+108	Put down held block	Put down held block	Put down held bock	Put down held block	f	t
 107	Pick up colored block	Pick up the {block color} block	Pick up the {block color} block	Pick up the {block color} block	f	t
+73	Goal	It is your goal that:	It is your goal that:	It is your goal that:	t	f
+72	Action	Consider doing:	Consider doing:	Consider doing:	t	f
+71	Sensing	Pay attention to:	Pay attention to:	Pay attention to:	t	f
 \.
 
 
@@ -1790,11 +1790,11 @@ COPY public.backend_capability_channels (id, capability_id, channel_id) FROM std
 88	71	20
 89	72	20
 90	73	20
-122	105	20
 124	107	20
 125	108	20
 131	114	20
 132	115	20
+133	116	20
 \.
 
 
@@ -1802,14 +1802,14 @@ COPY public.backend_capability_channels (id, capability_id, channel_id) FROM std
 -- Name: backend_capability_channels_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_capability_channels_id_seq', 132, true);
+SELECT pg_catalog.setval('public.backend_capability_channels_id_seq', 133, true);
 
 
 --
 -- Name: backend_capability_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_capability_id_seq', 115, true);
+SELECT pg_catalog.setval('public.backend_capability_id_seq', 116, true);
 
 
 --
@@ -1842,6 +1842,7 @@ COPY public.backend_colorparam (parameter_ptr_id, mode) FROM stdin;
 --
 
 COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
+4860	Blue	=	87	4205
 \.
 
 
@@ -1849,7 +1850,7 @@ COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
 -- Name: backend_condition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_condition_id_seq', 4858, true);
+SELECT pg_catalog.setval('public.backend_condition_id_seq', 4860, true);
 
 
 --
@@ -1858,9 +1859,9 @@ SELECT pg_catalog.setval('public.backend_condition_id_seq', 4858, true);
 
 COPY public.backend_device (id, name, owner_id, public, icon) FROM stdin;
 28	Logic	1	t	help_outline
-29	Location	1	t	room
 27	Movement	1	t	assignment
 30	Held Blocks	1	t	arrow_upward
+29	Location	1	t	room
 \.
 
 
@@ -1868,7 +1869,7 @@ COPY public.backend_device (id, name, owner_id, public, icon) FROM stdin;
 -- Name: backend_device_capabilities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_device_capabilities_id_seq', 140, true);
+SELECT pg_catalog.setval('public.backend_device_capabilities_id_seq', 141, true);
 
 
 --
@@ -1880,11 +1881,11 @@ COPY public.backend_device_caps (id, device_id, capability_id) FROM stdin;
 97	28	71
 98	28	72
 99	28	73
-131	29	105
 133	30	107
 134	30	108
 139	30	114
 140	30	115
+141	29	116
 \.
 
 
@@ -1931,7 +1932,7 @@ COPY public.backend_durationparam (parameter_ptr_id, maxhours, maxmins, maxsecs,
 --
 
 COPY public.backend_esrule (action_id, "Etrigger_id", rule_ptr_id) FROM stdin;
-1260	4171	1128
+1294	4206	1162
 \.
 
 
@@ -1947,7 +1948,7 @@ COPY public."backend_esrule_Striggers" (id, esrule_id, trigger_id) FROM stdin;
 -- Name: backend_esrule_triggersS_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."backend_esrule_triggersS_id_seq"', 840, true);
+SELECT pg_catalog.setval('public."backend_esrule_triggersS_id_seq"', 841, true);
 
 
 --
@@ -2034,13 +2035,12 @@ COPY public.backend_parameter (id, name, type, cap_id) FROM stdin;
 67	position	bin	60
 68	status	bin	61
 72	setting	bin	64
-78	rooms	set	105
 86	directions	set	70
 80	block color	set	107
-79	rooms	set	105
 87	color	set	114
 88	color	set	115
 89	room	set	115
+90	room	set	116
 \.
 
 
@@ -2048,7 +2048,7 @@ COPY public.backend_parameter (id, name, type, cap_id) FROM stdin;
 -- Name: backend_parameter_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_parameter_id_seq', 89, true);
+SELECT pg_catalog.setval('public.backend_parameter_id_seq', 90, true);
 
 
 --
@@ -2092,7 +2092,7 @@ COPY public.backend_rangeparam (parameter_ptr_id, min, max, "interval") FROM std
 --
 
 COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
-1128	241	es	1	2021-11-03 23:19:10.266844+00
+1162	241	es	1	2021-11-04 05:15:22.053006+00
 \.
 
 
@@ -2100,7 +2100,7 @@ COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
 -- Name: backend_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_rule_id_seq', 1160, true);
+SELECT pg_catalog.setval('public.backend_rule_id_seq', 1194, true);
 
 
 --
@@ -2182,13 +2182,12 @@ COPY public.backend_setparam (parameter_ptr_id, numopts) FROM stdin;
 30	8
 70	5
 71	3
-78	4
 86	4
 80	2
-79	9
 87	2
 88	2
 89	9
+90	9
 \.
 
 
@@ -2240,25 +2239,12 @@ COPY public.backend_setparamopt (id, value, param_id) FROM stdin;
 44	A Family Member	71
 43	A Guest	71
 45	Nobody	71
-46	1	78
-47	2	78
-48	3	78
-49	4	78
 54	Red	80
 56	Blue	80
 74	North	86
 75	East	86
 76	South	86
 77	West	86
-78	Patio	79
-79	Guest Bedroom	79
-80	Dining Room	79
-81	Master Bedroom	79
-82	Master Bathroom	79
-83	Kitchen	79
-84	Hall	79
-85	Guest Bathroom	79
-86	Entry	79
 87	Red	87
 88	Blue	87
 89	Red	88
@@ -2272,6 +2258,15 @@ COPY public.backend_setparamopt (id, value, param_id) FROM stdin;
 97	Hall	89
 98	Guest Bathroom	89
 99	Entry	89
+128	Patio	90
+129	Guest Bedroom	90
+130	Dining Room	90
+131	Master Bedroom	90
+132	Master Bathroom	90
+133	Kitchen	90
+134	Hall	90
+135	Guest Bathroom	90
+136	Entry	90
 \.
 
 
@@ -2279,7 +2274,7 @@ COPY public.backend_setparamopt (id, value, param_id) FROM stdin;
 -- Name: backend_setparamopt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_setparamopt_id_seq', 127, true);
+SELECT pg_catalog.setval('public.backend_setparamopt_id_seq', 136, true);
 
 
 --
@@ -2431,7 +2426,7 @@ SELECT pg_catalog.setval('public.backend_ssrule_triggers_id_seq', 1, false);
 --
 
 COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin;
-1260	108	30	t	Put down held block	20
+1294	116	29	t	I am in the Guest Bedroom?	20
 \.
 
 
@@ -2439,7 +2434,7 @@ COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin
 -- Name: backend_state_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_state_id_seq', 1292, true);
+SELECT pg_catalog.setval('public.backend_state_id_seq', 1326, true);
 
 
 --
@@ -2473,7 +2468,8 @@ COPY public.backend_timeparam (parameter_ptr_id, mode) FROM stdin;
 
 COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 4170	72	28	20	0	Consider doing:
-4171	71	28	20	0	Pay attention to:
+4205	114	30	20	1	Holding a Blue block?
+4206	72	28	20	0	Consider doing:
 \.
 
 
@@ -2481,7 +2477,7 @@ COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 -- Name: backend_trigger_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4203, true);
+SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4238, true);
 
 
 --
@@ -2786,6 +2782,36 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 324	2021-11-03 23:37:07.738314+00	115	Capability object (115)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
 357	2021-11-04 00:47:18.22598+00	115	Capability object (115)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
 390	2021-11-04 02:20:48.438901+00	115	Capability object (115)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
+423	2021-11-04 05:01:32.027653+00	115	Capability object (115)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+424	2021-11-04 05:01:38.414763+00	114	Capability object (114)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+425	2021-11-04 05:01:53.058814+00	105	Capability object (105)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+426	2021-11-04 05:02:04.323988+00	72	Capability object (72)	2	[{"changed": {"fields": ["readable"]}}]	14	1
+427	2021-11-04 05:02:09.182077+00	72	Capability object (72)	2	[]	14	1
+428	2021-11-04 05:02:13.309991+00	71	Capability object (71)	2	[{"changed": {"fields": ["readable"]}}]	14	1
+429	2021-11-04 05:02:21.453338+00	70	Capability object (70)	2	[]	14	1
+430	2021-11-04 05:02:26.580102+00	73	Capability object (73)	2	[{"changed": {"fields": ["readable"]}}]	14	1
+431	2021-11-04 05:05:33.082791+00	105	Capability object (105)	3		14	1
+432	2021-11-04 05:05:50.060301+00	116	Capability object (116)	1	[{"added": {}}]	14	1
+433	2021-11-04 05:07:02.240338+00	90	SetParam object (90)	1	[{"added": {}}]	16	1
+434	2021-11-04 05:07:22.863301+00	128	SetParamOpt object (128)	1	[{"added": {}}]	17	1
+435	2021-11-04 05:07:29.374713+00	129	SetParamOpt object (129)	1	[{"added": {}}]	17	1
+436	2021-11-04 05:07:37.418775+00	130	SetParamOpt object (130)	1	[{"added": {}}]	17	1
+437	2021-11-04 05:07:47.028109+00	131	SetParamOpt object (131)	1	[{"added": {}}]	17	1
+438	2021-11-04 05:07:59.944817+00	132	SetParamOpt object (132)	1	[{"added": {}}]	17	1
+439	2021-11-04 05:08:07.811193+00	133	SetParamOpt object (133)	1	[{"added": {}}]	17	1
+440	2021-11-04 05:08:14.549678+00	134	SetParamOpt object (134)	1	[{"added": {}}]	17	1
+441	2021-11-04 05:08:22.222819+00	135	SetParamOpt object (135)	1	[{"added": {}}]	17	1
+442	2021-11-04 05:08:28.461566+00	136	SetParamOpt object (136)	1	[{"added": {}}]	17	1
+443	2021-11-04 05:08:58.187894+00	29	Device object (29)	2	[{"changed": {"fields": ["caps"]}}]	27	1
+444	2021-11-04 05:14:17.751264+00	116	Capability object (116)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+445	2021-11-04 05:14:25.142923+00	115	Capability object (115)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+446	2021-11-04 05:14:33.224541+00	114	Capability object (114)	2	[{"changed": {"fields": ["readable", "writeable"]}}]	14	1
+447	2021-11-04 05:14:38.656283+00	114	Capability object (114)	2	[]	14	1
+448	2021-11-04 05:14:43.28469+00	108	Capability object (108)	2	[]	14	1
+449	2021-11-04 05:14:47.64443+00	107	Capability object (107)	2	[]	14	1
+450	2021-11-04 05:14:52.774213+00	73	Capability object (73)	2	[{"changed": {"fields": ["readable"]}}]	14	1
+451	2021-11-04 05:14:56.650905+00	72	Capability object (72)	2	[{"changed": {"fields": ["readable"]}}]	14	1
+452	2021-11-04 05:15:01.974468+00	71	Capability object (71)	2	[{"changed": {"fields": ["readable"]}}]	14	1
 \.
 
 
@@ -2793,7 +2819,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: iftttuser
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 422, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 476, true);
 
 
 --
