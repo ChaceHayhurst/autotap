@@ -1653,7 +1653,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 117, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$100000$cfVwkoaEA0qZ$ifBessa4q1JayTw0Y0w8837IDgDnmGd0jZUz3N3oFa8=	2021-11-09 06:46:16.979213+00	t	admin			admin@example.com	t	t	2021-10-21 20:02:28.180873+00
+1	pbkdf2_sha256$100000$cfVwkoaEA0qZ$ifBessa4q1JayTw0Y0w8837IDgDnmGd0jZUz3N3oFa8=	2021-11-10 02:50:11.673788+00	t	admin			admin@example.com	t	t	2021-10-21 20:02:28.180873+00
 \.
 
 
@@ -1770,12 +1770,12 @@ COPY public.backend_capability (id, name, commandlabel, eventlabel, statelabel, 
 70	Move in a direction	Go through a door to the {directions}	Go through a door to the {directions}	Go through a door to the {directions}	f	t
 72	Action	Consider doing:	Consider doing:	Consider doing:	t	f
 71	Sensing	Pay attention to:	Pay attention to:	Pay attention to:	t	f
-116	Current Room	I am in the {room}	I am in the {room}	I am in the {room}	f	t
-115	Block in room	There is a {color} block in the {room}	There is a {color} block in the {room}	There is a {color} block in the {room}	f	t
 108	Put down held block	Put down held block	Put down held bock	Put down held block	f	t
 107	Pick up colored block	Pick up the {block color} block	Pick up the {block color} block	Pick up the {block color} block	f	t
-73	Goal	It is your goal that:	It is your goal that:	It is your goal that:	t	f
-114	Holding block	I am holding a {color} block	I am holding a {color} block	I am holding a {color} block	f	t
+116	Current Room?	Am I in the {room}?	Am I in the {room}?	Am I in the {room}?	f	t
+115	Block in room?	Is there a {color} block in the {room}?	Is there a {color} block in the {room}?	Is there a {color} block in the {room}?	f	t
+114	Holding block?	Am I holding a {color} block?	Am I holding a {color} block?	Am I holding a {color} block?	f	t
+73	Goal	Get a 'yes' answer to:	Get a 'yes' answer to:	Get a 'yes' answer to:	t	f
 \.
 
 
@@ -1932,7 +1932,6 @@ COPY public.backend_durationparam (parameter_ptr_id, maxhours, maxmins, maxsecs,
 --
 
 COPY public.backend_esrule (action_id, "Etrigger_id", rule_ptr_id) FROM stdin;
-1327	4239	1195
 \.
 
 
@@ -2092,7 +2091,6 @@ COPY public.backend_rangeparam (parameter_ptr_id, min, max, "interval") FROM std
 --
 
 COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
-1195	241	es	1	2021-11-09 07:50:59.549276+00
 \.
 
 
@@ -2426,7 +2424,6 @@ SELECT pg_catalog.setval('public.backend_ssrule_triggers_id_seq', 1, false);
 --
 
 COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin;
-1327	115	30	t	There is a Red block in the Guest Bedroom	20
 \.
 
 
@@ -2469,7 +2466,6 @@ COPY public.backend_timeparam (parameter_ptr_id, mode) FROM stdin;
 COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 4170	72	28	20	0	Consider doing:
 4205	114	30	20	1	Holding a Blue block?
-4239	73	28	20	0	It is your goal that:
 \.
 
 
@@ -2819,6 +2815,10 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 481	2021-11-09 07:49:29.942327+00	107	Capability object (107)	2	[]	14	1
 482	2021-11-09 07:49:34.10327+00	73	Capability object (73)	2	[]	14	1
 483	2021-11-09 07:50:13.191683+00	114	Capability object (114)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
+484	2021-11-10 02:50:29.519774+00	116	Capability object (116)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+485	2021-11-10 02:50:46.016583+00	115	Capability object (115)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+486	2021-11-10 02:51:03.604831+00	114	Capability object (114)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+487	2021-11-10 02:51:22.511892+00	73	Capability object (73)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
 \.
 
 
@@ -2826,7 +2826,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: iftttuser
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 483, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 487, true);
 
 
 --
@@ -2920,6 +2920,7 @@ COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 nkvz6kvrvlyyk67qfq1ce744xbm2ay8f	ZGU2NWQ5ZDRhZGRjYzlhMDZmZDQ4NjhlN2ZhNmRlOWY4NTk1NmFlMTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MWMxNDczYjc4ZDQ4YTQ5MWE2NjBiY2U4M2U0ZDZiNzNmZmViNmIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2021-11-04 20:15:06.660369+00
 74wt2z5fw0hqurgmsyiv5tma025cmhgm	NGMxZDkwYzA1YzkzNzkxNWYzOWY5OGY3ZTE1ZjJlNDlkZmE4ZmQ3MTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MWMxNDczYjc4ZDQ4YTQ5MWE2NjBiY2U4M2U0ZDZiNzNmZmViNmIiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2021-11-17 18:29:48.362203+00
 dc49uqtkvdq4a4usu5sri6g1beri29gy	ZDlhNzFmZWFmODU2ODY3YjI0MjNiZjBhYjZjNmJkNzQyODMwNWRlZTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiIzODFjMTQ3M2I3OGQ0OGE0OTFhNjYwYmNlODNlNGQ2YjczZmZlYjZiIn0=	2021-11-23 06:46:16.982957+00
+bjorupyr20d3asugt3vys8p2k6jchn9c	ZGU2NWQ5ZDRhZGRjYzlhMDZmZDQ4NjhlN2ZhNmRlOWY4NTk1NmFlMTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MWMxNDczYjc4ZDQ4YTQ5MWE2NjBiY2U4M2U0ZDZiNzNmZmViNmIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2021-11-24 02:50:11.677408+00
 \.
 
 
