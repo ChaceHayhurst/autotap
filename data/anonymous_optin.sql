@@ -1770,9 +1770,9 @@ COPY public.backend_capability (id, name, commandlabel, eventlabel, statelabel, 
 70	Move in a direction	Go through a door to the {directions}	Go through a door to the {directions}	Go through a door to the {directions}	f	t
 107	Pick up colored block	Pick up the {block color} block	Pick up the {block color} block	Pick up the {block color} block	f	t
 108	Put down held block	Put down held block	Put down held bock	Put down held block	f	t
-73	Goal	It is your goal that:	It is your goal that:	It is your goal that:	f	f
 72	Action	Consider doing:	Consider doing:	Consider doing:	f	f
 71	Sensing	Pay attention to:	Pay attention to:	Pay attention to:	f	f
+73	Goal	Get a 'yes' answer to:	Get a 'yes' answer to:	Get a 'yes' answer to:	f	f
 116	Current Room	I am in the {room}	I am in the {room}	I am in the {room}	t	f
 115	Block in room	There is a {color} block in the {room}	There is a {color} block in the {room}	There is a {color} block in the {room}	t	f
 114	Holding block	I am holding a {color} block	I am holding a {color} block	I am holding a {color} block	t	f
@@ -1843,7 +1843,6 @@ COPY public.backend_colorparam (parameter_ptr_id, mode) FROM stdin;
 
 COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
 4860	Blue	=	87	4205
-4861	Red	=	87	4239
 4862	Patio	=	90	4240
 \.
 
@@ -1852,7 +1851,7 @@ COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
 -- Name: backend_condition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_condition_id_seq', 4862, true);
+SELECT pg_catalog.setval('public.backend_condition_id_seq', 4863, true);
 
 
 --
@@ -1934,7 +1933,6 @@ COPY public.backend_durationparam (parameter_ptr_id, maxhours, maxmins, maxsecs,
 --
 
 COPY public.backend_esrule (action_id, "Etrigger_id", rule_ptr_id) FROM stdin;
-1327	4239	1195
 \.
 
 
@@ -1943,7 +1941,6 @@ COPY public.backend_esrule (action_id, "Etrigger_id", rule_ptr_id) FROM stdin;
 --
 
 COPY public."backend_esrule_Striggers" (id, esrule_id, trigger_id) FROM stdin;
-842	1195	4240
 \.
 
 
@@ -2095,7 +2092,6 @@ COPY public.backend_rangeparam (parameter_ptr_id, min, max, "interval") FROM std
 --
 
 COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
-1195	241	es	1	2021-11-09 08:06:54.647611+00
 \.
 
 
@@ -2103,7 +2099,7 @@ COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
 -- Name: backend_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_rule_id_seq', 1195, true);
+SELECT pg_catalog.setval('public.backend_rule_id_seq', 1196, true);
 
 
 --
@@ -2429,7 +2425,6 @@ SELECT pg_catalog.setval('public.backend_ssrule_triggers_id_seq', 1, false);
 --
 
 COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin;
-1327	70	27	t	Go through a door to the East	20
 \.
 
 
@@ -2437,7 +2432,7 @@ COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin
 -- Name: backend_state_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_state_id_seq', 1327, true);
+SELECT pg_catalog.setval('public.backend_state_id_seq', 1328, true);
 
 
 --
@@ -2472,7 +2467,6 @@ COPY public.backend_timeparam (parameter_ptr_id, mode) FROM stdin;
 COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 4170	72	28	20	0	Consider doing:
 4205	114	30	20	1	Holding a Blue block?
-4239	114	30	20	0	I am holding a Red block
 4240	116	29	20	1	I am in the Patio
 \.
 
@@ -2481,7 +2475,7 @@ COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 -- Name: backend_trigger_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4240, true);
+SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4241, true);
 
 
 --
@@ -2827,6 +2821,13 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 485	2021-11-09 08:04:04.228082+00	115	Capability object (115)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
 486	2021-11-09 08:04:19.593247+00	114	Capability object (114)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
 487	2021-11-09 08:06:20.293035+00	114	Capability object (114)	2	[{"changed": {"fields": ["commandlabel", "eventlabel"]}}]	14	1
+488	2021-11-10 02:36:17.137714+00	116	Capability object (116)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+489	2021-11-10 02:36:35.464813+00	115	Capability object (115)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+490	2021-11-10 02:36:50.582438+00	114	Capability object (114)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+491	2021-11-10 02:37:18.324947+00	73	Capability object (73)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
+492	2021-11-10 02:40:51.580395+00	116	Capability object (116)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+493	2021-11-10 02:41:09.62743+00	115	Capability object (115)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
+494	2021-11-10 02:41:24.651378+00	114	Capability object (114)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
 \.
 
 
@@ -2834,7 +2835,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: iftttuser
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 487, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 494, true);
 
 
 --
