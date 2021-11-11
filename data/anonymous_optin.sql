@@ -1653,7 +1653,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 117, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$100000$cfVwkoaEA0qZ$ifBessa4q1JayTw0Y0w8837IDgDnmGd0jZUz3N3oFa8=	2021-11-09 08:03:45.664925+00	t	admin			admin@example.com	t	t	2021-10-21 20:02:28.180873+00
+1	pbkdf2_sha256$100000$cfVwkoaEA0qZ$ifBessa4q1JayTw0Y0w8837IDgDnmGd0jZUz3N3oFa8=	2021-11-11 16:30:12.984306+00	t	admin			admin@example.com	t	t	2021-10-21 20:02:28.180873+00
 \.
 
 
@@ -1773,10 +1773,9 @@ COPY public.backend_capability (id, name, commandlabel, eventlabel, statelabel, 
 72	Action	Consider doing:	Consider doing:	Consider doing:	f	f
 71	Sensing	Pay attention to:	Pay attention to:	Pay attention to:	f	f
 73	Goal	Get a 'yes' answer to:	Get a 'yes' answer to:	Get a 'yes' answer to:	f	f
-116	Current Room	I am in the {room}	I am in the {room}	I am in the {room}	t	f
 115	Block in room	There is a {color} block in the {room}	There is a {color} block in the {room}	There is a {color} block in the {room}	t	f
-114	Holding block	I am holding a {color} block	I am holding a {color} block	I am holding a {color} block	t	f
-117	Task Complete	Task Complete	Task Complete	Task Complete	f	t
+116	Current Room	The robot is in the {room}	The robot is in the {room}	The robot is in the {room}	t	f
+114	Holding block	The robot is holding a {color} block	The robot is holding a {color} block	The robot is holding a {color} block	t	f
 \.
 
 
@@ -1796,7 +1795,6 @@ COPY public.backend_capability_channels (id, capability_id, channel_id) FROM std
 131	114	20
 132	115	20
 133	116	20
-134	117	20
 \.
 
 
@@ -1846,8 +1844,9 @@ COPY public.backend_colorparam (parameter_ptr_id, mode) FROM stdin;
 COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
 4860	Blue	=	87	4205
 4862	Patio	=	90	4240
-4864	Entry	=	90	4242
 4865	Kitchen	=	90	4243
+4866	Entry	=	90	4244
+4867	Kitchen	=	90	4245
 \.
 
 
@@ -1855,7 +1854,7 @@ COPY public.backend_condition (id, val, comp, par_id, trigger_id) FROM stdin;
 -- Name: backend_condition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_condition_id_seq', 4865, true);
+SELECT pg_catalog.setval('public.backend_condition_id_seq', 4867, true);
 
 
 --
@@ -1891,7 +1890,6 @@ COPY public.backend_device_caps (id, device_id, capability_id) FROM stdin;
 139	30	114
 140	30	115
 141	29	116
-142	28	117
 \.
 
 
@@ -1938,8 +1936,8 @@ COPY public.backend_durationparam (parameter_ptr_id, maxhours, maxmins, maxsecs,
 --
 
 COPY public.backend_esrule (action_id, "Etrigger_id", rule_ptr_id) FROM stdin;
-1329	4242	1197
-1330	4243	1198
+1331	4244	1199
+1332	4245	1200
 \.
 
 
@@ -2099,8 +2097,8 @@ COPY public.backend_rangeparam (parameter_ptr_id, min, max, "interval") FROM std
 --
 
 COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
-1197	241	es	1	2021-11-10 02:45:13.738549+00
-1198	241	es	1	2021-11-10 02:47:05.022047+00
+1199	241	es	1	2021-11-11 16:31:34.788933+00
+1200	241	es	1	2021-11-11 16:31:59.273404+00
 \.
 
 
@@ -2108,7 +2106,7 @@ COPY public.backend_rule (id, owner_id, type, task, lastedit) FROM stdin;
 -- Name: backend_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_rule_id_seq', 1198, true);
+SELECT pg_catalog.setval('public.backend_rule_id_seq', 1200, true);
 
 
 --
@@ -2434,8 +2432,8 @@ SELECT pg_catalog.setval('public.backend_ssrule_triggers_id_seq', 1, false);
 --
 
 COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin;
-1329	70	27	t	Go through a door to the North	20
-1330	117	28	t	Task Complete	20
+1331	70	27	t	Go through a door to the North	20
+1332	70	27	t	Go through a door to the North	20
 \.
 
 
@@ -2443,7 +2441,7 @@ COPY public.backend_state (id, cap_id, dev_id, action, text, chan_id) FROM stdin
 -- Name: backend_state_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_state_id_seq', 1330, true);
+SELECT pg_catalog.setval('public.backend_state_id_seq', 1332, true);
 
 
 --
@@ -2479,8 +2477,9 @@ COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 4170	72	28	20	0	Consider doing:
 4205	114	30	20	1	Holding a Blue block?
 4240	116	29	20	1	I am in the Patio
-4242	116	29	20	0	I am in the Entry
 4243	116	29	20	0	I am in the Kitchen
+4244	116	29	20	0	The robot is in the Entry
+4245	116	29	20	0	The robot is in the Kitchen
 \.
 
 
@@ -2488,7 +2487,7 @@ COPY public.backend_trigger (id, cap_id, dev_id, chan_id, pos, text) FROM stdin;
 -- Name: backend_trigger_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4243, true);
+SELECT pg_catalog.setval('public.backend_trigger_id_seq', 4245, true);
 
 
 --
@@ -2843,6 +2842,9 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 494	2021-11-10 02:41:24.651378+00	114	Capability object (114)	2	[{"changed": {"fields": ["name", "statelabel", "commandlabel", "eventlabel"]}}]	14	1
 495	2021-11-10 02:43:56.601234+00	117	Capability object (117)	1	[{"added": {}}]	14	1
 496	2021-11-10 02:46:35.774551+00	28	Device object (28)	2	[{"changed": {"fields": ["caps"]}}]	27	1
+497	2021-11-11 16:30:22.992405+00	117	Capability object (117)	3		14	1
+498	2021-11-11 16:30:56.91997+00	116	Capability object (116)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
+499	2021-11-11 16:31:15.174156+00	114	Capability object (114)	2	[{"changed": {"fields": ["statelabel", "commandlabel", "eventlabel"]}}]	14	1
 \.
 
 
@@ -2850,7 +2852,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: iftttuser
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 496, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 499, true);
 
 
 --
@@ -2945,6 +2947,7 @@ nkvz6kvrvlyyk67qfq1ce744xbm2ay8f	ZGU2NWQ5ZDRhZGRjYzlhMDZmZDQ4NjhlN2ZhNmRlOWY4NTk
 74wt2z5fw0hqurgmsyiv5tma025cmhgm	NGMxZDkwYzA1YzkzNzkxNWYzOWY5OGY3ZTE1ZjJlNDlkZmE4ZmQ3MTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MWMxNDczYjc4ZDQ4YTQ5MWE2NjBiY2U4M2U0ZDZiNzNmZmViNmIiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2021-11-17 18:29:48.362203+00
 c3h20vz1lq7nduqsu1no1b3cmprz8f7j	OGY4NDhhYmNhNzIzMTA2MjdmNzc2NTMxYWJhNGI1MzliMjc1ODc3OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMzgxYzE0NzNiNzhkNDhhNDkxYTY2MGJjZTgzZTRkNmI3M2ZmZWI2YiIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2021-11-18 05:39:06.354002+00
 phykgzpzgum8f12kcme3tzoj92uaee8q	NGMxZDkwYzA1YzkzNzkxNWYzOWY5OGY3ZTE1ZjJlNDlkZmE4ZmQ3MTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MWMxNDczYjc4ZDQ4YTQ5MWE2NjBiY2U4M2U0ZDZiNzNmZmViNmIiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2021-11-23 08:03:45.66872+00
+lilsh0lk18a59htxjyst8wyubjnkmqt0	OGY4NDhhYmNhNzIzMTA2MjdmNzc2NTMxYWJhNGI1MzliMjc1ODc3OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMzgxYzE0NzNiNzhkNDhhNDkxYTY2MGJjZTgzZTRkNmI3M2ZmZWI2YiIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2021-11-25 16:30:12.987918+00
 \.
 
 
