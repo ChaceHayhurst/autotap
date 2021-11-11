@@ -17,7 +17,7 @@
 <!-- display the next this -->
 <p *ngIf="userDataService.currentlyStagedRule.ifClause.length == 0"
 (click)="userDataService.gotoChannelSelector('trigger', -1)" class="clause clickable pointer">
-  Select a component type
+  Select a category
 </p>
 
 <!-- display the if clauses -->
@@ -31,7 +31,7 @@ style="width: 100%">
 <p (click)="userDataService.gotoChannelSelector('action', -1)" class="clause clickable pointer"
 *ngIf="userDataService.currentlyStagedRule.thenClause.length == 0"
 style="width: 100%">
-  Select a component
+  Select a part
 </p>
 
 <!-- PRIORITY CLAUSE -->
