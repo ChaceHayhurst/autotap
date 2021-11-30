@@ -27,4 +27,4 @@ services:
         - ./ifttt-frontend/rule-creation/RMI:/home/superifttt/frontend
         - /home/superifttt/frontend/node_modules
       ports:
-        - "443:443"
+        - "4200:4200"
