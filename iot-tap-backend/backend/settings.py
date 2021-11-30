@@ -156,8 +156,8 @@ CSRF_TRUSTED_ORIGINS = []
 # https://github.com/ottoyiu/django-cors-headers
 # CORS whitelist
 CORS_ORIGIN_WHITELIST = (
-    '127.0.0.1:4200',
-    'localhost:4200',
+    '127.0.0.1:443',
+    'localhost:443',
 )
 
 CORS_ORIGIN_ALLOW_ALL = False
